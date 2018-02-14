@@ -1,0 +1,1 @@
+# easy-photo-1.0
