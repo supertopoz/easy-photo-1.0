@@ -1,0 +1,42 @@
+#menu {
+	background: white;
+	padding:10px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill,80%) 20%;
+	box-shadow: 0 2px 1px #c2ccd1;
+    justify-items: center;
+}
+
+#logout-btn {
+  justify-self: right; 
+  background: #00adef;
+  color:white;
+  padding:2px;
+  border: 1px solid #ac1100;
+  border-radius: 2px;
+  font-family: "Raleway",sans-serif;
+  transition: all 0.15s linear;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 0.075em 0.075em rgba(0,0,0,0.5);
+}
+
+#logout-btn:hover {
+  background: rgb(237,0,140);
+  cursor: pointer;
+}
+
+#wrapper {
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(auto-fill);
+}
+
+#login{
+	padding-top: 20px;
+}
+
+
+#qunit-header {
+	margin-top: 200px;
+}
+
