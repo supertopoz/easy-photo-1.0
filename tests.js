@@ -69,6 +69,24 @@ QUnit.test( "checks timeStamp is added to Redux state", ( assert ) => {
     assert.equal(storedNow, now, "Tests title is updated in Redux store!" );  
 });
 
+QUnit.test( "checks tags are added to Redux state", ( assert ) => { 
+    
+    const tags = 'Bob, Bill, Steve'
+    updateUi.dispatch(addTags({value: tags}))
+    const storedTags = window.store.newImage.tags        
+    console.log(window.store)
+    assert.equal(storedTags, tags, "Tests tags are updated in Redux store!" );  
+});
+
+QUnit.test( "Check 64 bit image is added to Redux state", ( assert ) => { 
+    
+    const image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGGww6JLHAkAYAAACwSURBVBjTY/j//z/D////GXfd+1wQs+HRLY6OK/+lJ17/G7Ph0a1d9z4X/P//n/H///8MjP///2fsPfFmac3Bl5EMWECLvfjyYguRaMZd9z4X+K162M+AB2wKky9k/u+Yuejam5/C+BT+/vtfmVF64vW/b7//ZcKnUJiT+R9eBciAyVGe+y4hRY7y3HeZ4vQEpxFSGKcnOI3JVZFnYou9+HJcilrsxZe7KvJMZCA2wAGgOWN3AnUiaAAAAABJRU5ErkJggg=='
+    updateUi.dispatch(addImage({value: image}))
+    const storedImage = window.store.newImage.image        
+    console.log(window.store)
+    assert.equal(storedImage, storedImage, "Tests image is held in Redux store!" );  
+});
+
 
 
 

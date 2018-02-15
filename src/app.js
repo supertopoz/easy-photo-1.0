@@ -88,6 +88,7 @@ const previewFile = (e) => {
 
   if (file) {
   reader.readAsDataURL(file); //reads the data as a URL
+  console.log(reader)
   } else {
     preview.src = "";
   }
