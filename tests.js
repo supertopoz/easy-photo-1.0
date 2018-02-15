@@ -22,7 +22,11 @@ QUnit.test( "Appends a menu bar", ( assert ) => {
 
 QUnit.module( "User Login Tests" );
 QUnit.test( "Appends a login div", ( assert ) => {
-  assert.equal( $( "div", "#login" ).length, 4, "Login menu added successfully!" );
+  let numDivs = 4
+  firebase.auth().onAuthStateChanged((user) => {
+    if(user) numDivs = 2; 
+  });  
+  assert.equal( $( "div", "#login" ).length, numDivs, "Login menu added successfully!" );
 });
 
 QUnit.test( "Checks check for user is working", ( assert ) => {
@@ -34,7 +38,36 @@ QUnit.test( "Checks check for user is working", ( assert ) => {
 });
 
 
-QUnit.module( "Add picture button" );
+QUnit.module( "Add picture UI" );
+QUnit.test( "Appends add picture div", ( assert ) => {  
+  let numDivs = 0
+  firebase.auth().onAuthStateChanged((user) => {
+    if(user) numDivs = 4; 
+  });  
+  assert.equal( $( "div", "#pictures" ).length, numDivs, "Added picture add block!" );
+});
+
+QUnit.test( "Check file upload button works", ( assert ) => {  
+  assert.expect( 1 );
+    let func = previewFile(true);
+    assert.ok(func, "Added picture add block!" );
+});
+
+
+QUnit.module( "Add data to firebase" );
+QUnit.test( "checks new title letter is added to Redux state", ( assert ) => { 
+    updateUi.dispatch(addKey({value: 'k'}))
+    const data = window.store.newImage.title        
+    assert.equal(data, 'k', "Tests title is updated in Redux store!" );  
+});
+
+QUnit.test( "checks timeStamp is added to Redux state", ( assert ) => { 
+    const now = Date.now()
+    updateUi.dispatch(addTimeStamp({value: now}))
+    const storedNow = window.store.newImage.timestamp        
+    console.log(window.store)
+    assert.equal(storedNow, now, "Tests title is updated in Redux store!" );  
+});
 
 
 

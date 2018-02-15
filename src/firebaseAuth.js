@@ -36,6 +36,7 @@ const loggedInView = () => {
   console.log('user logged in')// User is signed in.
   $('#logout-btn').show()
   $('#login').hide()
+  addPictureAddingTool();
 }
 
 const loggedOutView = () => {

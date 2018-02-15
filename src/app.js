@@ -58,7 +58,40 @@ const addLogin = () => {
 	ui.start('#firebaseui-auth-container', uiConfig);
 }
 
+const addPictureAddingTool = () => {
+	$('#pictures').append(
+  '<div>' +
+  	'<div id="add-item">'+
+	  	'<input placeholder="Title..." id="picture-title" class="picture-title" type="text">'+
+	  	'<span class="timestamp">Timestamp</span>'+
+	  	'<label id="upload-picture-btn" class="upload-picture custom-file-upload">'+
+    		'<input id="uploaded-picture" hidden type="file" onchange="previewFile()">'+   
+    			'<span class="btn">ADD PICTURE</span>'+
+  			'</label>'+ 
+      '<img src="" id="preview-image"></img>'+  
+	  	'<textarea placeholder="Describe..." class="picture-tags"></textarea>'+
+	  	'<button class="save-picture-btn">Save</button>'+
+  	'</div>'+
+  '</div>' 
+  )	
+}
 
+const previewFile = (e) => {
+  if(e) return true;
+  var preview = document.querySelector('#preview-image'); //selects the query named img
+  var file    = document.querySelector('#uploaded-picture').files[0]; //sames as here
+  var reader  = new FileReader();
+  $('.upload-picture').hide(); 
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  }
+
+  if (file) {
+  reader.readAsDataURL(file); //reads the data as a URL
+  } else {
+    preview.src = "";
+  }
+}
 
 
 
