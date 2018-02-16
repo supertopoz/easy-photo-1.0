@@ -16,7 +16,7 @@ const reducer = (state = {save: false, newImage:{}}, action) =>{
       }) 
     case 'ADD_IMAGE':
       return Object.assign({}, state, { 
-        newImage: upDateCurrentPicture(state.newImage, {tags: action.value})
+        newImage: upDateCurrentPicture(state.newImage, {image: action.value})
       })           
     default:
       return state
@@ -28,7 +28,6 @@ const upDateCurrentPicture = (state, obj) => {
 
   const key = Object.keys(obj)[0]
   state[key] = obj[key]
-  console.log(state)
   return state
 }
 
@@ -39,7 +38,7 @@ const updateUi = Redux.createStore(reducer);
 
 updateUi.subscribe(() => {
   window.store = updateUi.getState();
-
+  console.log(updateUi.getState())
 });
 
 const addKey = (e) => ({type:'ADD_TITLE', value: e.value})

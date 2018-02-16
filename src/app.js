@@ -69,7 +69,7 @@ const addPictureAddingTool = () => {
     			'<span class="btn">ADD PICTURE</span>'+
   			'</label>'+ 
       '<img src="" id="preview-image"></img>'+  
-	  	'<textarea placeholder="Describe..." class="picture-tags"></textarea>'+
+	  	'<textarea id="new-picture-tags" placeholder="Describe..." class="picture-tags"></textarea>'+
 	  	'<button class="save-picture-btn">Save</button>'+
   	'</div>'+
   '</div>' 
@@ -88,7 +88,8 @@ const previewFile = (e) => {
 
   if (file) {
   reader.readAsDataURL(file); //reads the data as a URL
-  console.log(reader)
+  console.log(reader.result)
+  addPictureToRedux(reader)
   } else {
     preview.src = "";
   }

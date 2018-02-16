@@ -54,18 +54,24 @@ QUnit.test( "Check file upload button works", ( assert ) => {
 });
 
 
-QUnit.module( "Add data to firebase" );
+QUnit.module( "Add data to Redux store" );
 QUnit.test( "checks new title letter is added to Redux state", ( assert ) => { 
     updateUi.dispatch(addKey({value: 'k'}))
     const data = window.store.newImage.title        
     assert.equal(data, 'k', "Tests title is updated in Redux store!" );  
 });
 
+QUnit.test( "checks new title letter is added to Redux state on key press", ( assert ) => { 
+    const title = getTitleValue('this is a test')
+    const data = window.store.newImage.title        
+    assert.equal(data, 'this is a test', "Tests title is updated in Redux store!" );  
+});
+
+
 QUnit.test( "checks timeStamp is added to Redux state", ( assert ) => { 
     const now = Date.now()
     updateUi.dispatch(addTimeStamp({value: now}))
     const storedNow = window.store.newImage.timestamp        
-    console.log(window.store)
     assert.equal(storedNow, now, "Tests title is updated in Redux store!" );  
 });
 
@@ -74,18 +80,35 @@ QUnit.test( "checks tags are added to Redux state", ( assert ) => {
     const tags = 'Bob, Bill, Steve'
     updateUi.dispatch(addTags({value: tags}))
     const storedTags = window.store.newImage.tags        
-    console.log(window.store)
     assert.equal(storedTags, tags, "Tests tags are updated in Redux store!" );  
 });
 
-QUnit.test( "Check 64 bit image is added to Redux state", ( assert ) => { 
+QUnit.test( "checks tags are added to Redux state using textarea", ( assert ) => { 
+   
+    const tags = 'Bob, Bill, Steve'
+    addTagsToRedux(tags)   
+    const storedTags = window.store.newImage.tags        
+    assert.equal(storedTags, tags, "Tests tags are updated in Redux store!" );  
+});
+
+
+
+QUnit.test( "checks 64 bit image is added to Redux state", ( assert ) => { 
     
     const image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGGww6JLHAkAYAAACwSURBVBjTY/j//z/D////GXfd+1wQs+HRLY6OK/+lJ17/G7Ph0a1d9z4X/P//n/H///8MjP///2fsPfFmac3Bl5EMWECLvfjyYguRaMZd9z4X+K162M+AB2wKky9k/u+Yuejam5/C+BT+/vtfmVF64vW/b7//ZcKnUJiT+R9eBciAyVGe+y4hRY7y3HeZ4vQEpxFSGKcnOI3JVZFnYou9+HJcilrsxZe7KvJMZCA2wAGgOWN3AnUiaAAAAABJRU5ErkJggg=='
     updateUi.dispatch(addImage({value: image}))
     const storedImage = window.store.newImage.image        
-    console.log(window.store)
     assert.equal(storedImage, storedImage, "Tests image is held in Redux store!" );  
 });
+
+QUnit.test( "checks 64 bit image is added to Redux state on button click", ( assert ) => { 
+    const image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wGGww6JLHAkAYAAACwSURBVBjTY/j//z/D////GXfd+1wQs+HRLY6OK/+lJ17/G7Ph0a1d9z4X/P//n/H///8MjP///2fsPfFmac3Bl5EMWECLvfjyYguRaMZd9z4X+K162M+AB2wKky9k/u+Yuejam5/C+BT+/vtfmVF64vW/b7//ZcKnUJiT+R9eBciAyVGe+y4hRY7y3HeZ4vQEpxFSGKcnOI3JVZFnYou9+HJcilrsxZe7KvJMZCA2wAGgOWN3AnUiaAAAAABJRU5ErkJggg=='
+    addPictureToRedux(image)   
+    const storedImage = window.store.newImage.image   
+    assert.equal(storedImage, image, "Tests image is held in Redux store after button click!" );  
+});
+
+
 
 
 
